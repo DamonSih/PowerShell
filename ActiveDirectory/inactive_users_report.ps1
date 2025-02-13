@@ -5,7 +5,7 @@
 .DESCRIPTION
   This script identifies inactive users (no logon in 60 days) in a specified AD OU and generates a CSV report, and emails it to designated recipients.
 
-.PARAMETER OU
+.PARAMETER SearchBase
   Target Organizational Unit distinguished name
 
 .PARAMETER ReportPath
@@ -40,7 +40,7 @@ param(
     [ValidateScript({ 
         try { Get-ADObject $_ } catch { throw "Invalid OU: $_" }
     })]
-    [string]$OU,
+    [string]$SearchBase,
 
     [Parameter(Mandatory)]
     [ValidateScript({
