@@ -67,7 +67,7 @@ param(
     [int]$RetentionDays = 60
 )
 
-# "Initialize Error Collection
+# Initialize Error Collection
 $ErrorActionPreference = 'Stop'
 $script:Errors = [System.Collections.Generic.List[object]]::new()
 
