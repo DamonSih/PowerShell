@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-	Gather and export user properties from AD into a CSV file and send this report via email
+	Gather and export user properties from AD into a CSV file and send this report via email.
 .DESCRIPTION
 	This sample demonstrates how to gather and export user properties from Active Directory (AD) into a CSV file, and then send this report via email.
 .EXAMPLE
