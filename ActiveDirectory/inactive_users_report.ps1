@@ -207,7 +207,7 @@ if ($script:Errors.Count -gt 0) {
     
     try {
         Send-MailMessage -From $FromEmail -To $ToEmail `
-                       -Subject "Report Errors - $(Get-Date -Format 'yyyy-MM-dd')" `
+                       -Subject "Inactive Users Report Errors - $(Get-Date -Format 'yyyy-MM-dd')" `
                        -Body $errorReport -SmtpServer $SmtpServer
     } catch {
         Write-Error "Failed to send error report: $_"
