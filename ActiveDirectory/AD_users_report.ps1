@@ -75,7 +75,7 @@ Select-Object @{Name="Full Name"; Expression={$_.Name}},
               @{Name="Last Logon Date"; Expression={$_.LastLogonDate.ToString("MM/dd/yyyy")}},
               @{Name="Last Logon Timestamp"; Expression={[datetime]::FromFileTime($_.lastLogonTimestamp).ToString("MM/dd/yyyy")}}
 
-$tempFile = "C:\Temp\AD_Users_Full_Export.csv"
+$tempFile = "your_path"
 $Users | Export-Csv -Path $tempFile -NoTypeInformation -Encoding UTF8
 Write-Host "Export is completed successfully! File Path: $tempFile" -ForegroundColor Green
 
