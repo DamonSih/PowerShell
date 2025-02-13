@@ -5,7 +5,6 @@
 	This sample demonstrates how to gather and export user properties from Active Directory (AD) into a CSV file, and then send this report via email.
 .EXAMPLE
 	PS> ./AD_users_report.ps1
-	https://github.com/themazdarati/PowerShell/ActiveDirectory
 .NOTES
 	Author: Damon Sih Boon Kiat | License: CC0
 #>
