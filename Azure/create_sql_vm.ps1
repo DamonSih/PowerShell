@@ -9,8 +9,6 @@
 	Specifies the target Resource Sroup name
 .EXAMPLE
 	PS> ./create-sql-vm.ps1 -VMName AZRWE1AVLCRDB3 -RGName WE1-EPD-AVLCRETA-RG -License PAYG
-.LINK
-	https://github.com/themazdarati/Azure
 .NOTES
 	Author: Damon Sih Boon Kiat | License: CC0
 #>
