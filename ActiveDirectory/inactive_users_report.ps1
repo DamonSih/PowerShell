@@ -165,7 +165,7 @@ function Send-ReportNotification {
         }
 
         Send-MailMessage @mailParams
-        Write-Output "Report notification sent to $($Recipients -join ', ')"
+        Write-Output "Report sent to $($Recipients -join ', ')"
 
     } catch {
         $script:Errors.Add([PSCustomObject]@{
