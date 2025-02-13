@@ -21,8 +21,6 @@
 	Provide the name of the destination VHD file to which the VHD of the managed disk will be copied
 .EXAMPLE
 	PS> ./disk-export-to-blob.ps1 -subscriptionId 48d31e3b-17b4-431c-8201-794dc197ea95 -resourceGroupName USE2-NPD-AVLCRETA-RG -diskName AZRUSE2AVLCRDB3_DataDisk_2 -sasExpiryDuration 7200 -storageAccountName migratersa592175211 -storageContainerName export-vhd -storageAccountKey '<YOUR KEY HERE>' -destinationVHDFileName AZRUSE2AVLCRDB3_DataDisk_2.vhd
-.LINK
-	https://github.com/themazdarati/Azure
 .NOTES
 	Author: Damon Sih Boon Kiat | License: CC0
 #>
