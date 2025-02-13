@@ -4,7 +4,7 @@
 .DESCRIPTION
 	This sample demonstrates how administrators ensure users are aware of upcoming password changes and can take action to reset their password on time.
 .EXAMPLE
-	PS> ./AD_users_report.ps1
+	PS> ./password_expiry_notifier.ps1
 .NOTES
 	Author: Damon Sih Boon Kiat | License: CC0
 #>
