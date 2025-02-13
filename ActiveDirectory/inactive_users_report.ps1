@@ -14,9 +14,6 @@
 .PARAMETER ToEmail
   Recipient email address(es)
 
-.PARAMETER ToAdmin
-  Admin email address
-
 .PARAMETER FromEmail
   Sender email address
 
@@ -58,10 +55,6 @@ param(
     [Parameter(Mandatory)]
     [ValidatePattern('^.+@.+\..+$')]
     [string[]]$ToEmail,
-
-    [Parameter(Mandatory)]
-    [ValidatePattern('^.+@.+\..+$')]
-    [string[]]$ToAdmin,
     
     [Parameter(Mandatory)]
     [ValidatePattern('^.+@.+\..+$')]
@@ -213,7 +206,7 @@ if ($script:Errors.Count -gt 0) {
     Write-Warning "Encountered $($script:Errors.Count) errors:`n$errorReport"
     
     try {
-        Send-MailMessage -From $FromEmail -To $ToAdmin `
+        Send-MailMessage -From $FromEmail -To $ToEmail `
                        -Subject "Report Errors - $(Get-Date -Format 'yyyy-MM-dd')" `
                        -Body $errorReport -SmtpServer $SmtpServer
     } catch {
