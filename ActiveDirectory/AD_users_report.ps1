@@ -75,14 +75,14 @@ Select-Object @{Name="Full Name"; Expression={$_.Name}},
               @{Name="Last Logon Date"; Expression={$_.LastLogonDate.ToString("MM/dd/yyyy")}},
               @{Name="Last Logon Timestamp"; Expression={[datetime]::FromFileTime($_.lastLogonTimestamp).ToString("MM/dd/yyyy")}}
 
-$tempFile = "your_path"
+$tempFile = "C:\Reports\AD_users_report.csv"
 $Users | Export-Csv -Path $tempFile -NoTypeInformation -Encoding UTF8
 Write-Host "Export is completed successfully! File Path: $tempFile" -ForegroundColor Green
 
 # SMTP configuration
-$SMTPServer = "your_smtp_server"
-$From = "from_address"
-$To = "to_address","to_address1"
+$SMTPServer = "smtp.contoso.com"
+$From = "noreply@contoso.com"
+$To = "it@contoso.com","admin@contoso.com"
 $Subject = "Daily Report - AD Users Report"
 $messageBody = "The report generated from your_server as per your schedule has been sent in this email as an attachement."
 
