@@ -17,7 +17,7 @@
   Specifies the maximum number of concurrent connections (default = 32).
 
 .EXAMPLE
-  PS> .\PS_Remote_Check_WindowsUpdates.ps1 -Computers server1,server2 -ConnectionTimeout 15
+  PS> .\check_windows_updates.ps1 -Computers server1,server2 -ConnectionTimeout 15
 
     Server    PendingUpdates Status
     ------    -------------- ------
