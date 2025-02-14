@@ -66,7 +66,7 @@ Select-Object @{Name="Full Name"; Expression={$_.Name}},
               @{Name="When Created"; Expression={$_.WhenCreated.ToString("MM/dd/yyyy")}},
               @{Name="When Modified"; Expression={$_.WhenChanged.ToString("MM/dd/yyyy")}},
               @{Name="targetAddress"; Expression={$_.targetAddress}},
-              @{Name="Proxy Email Address"; Expression={($_.proxyAddresses | Where-Object {$_ -like "SMTP:*"}) -replace "SMTP:",""}},
+              @{Name="Proxy Email Address"; Expression={$_.proxyAddresses},
               @{Name="Account Expiry"; Expression={
                   if ($_.accountExpires -ne 9223372036854775807) {
                       [datetime]::FromFileTime($_.accountExpires).ToString("MM/dd/yyyy")
