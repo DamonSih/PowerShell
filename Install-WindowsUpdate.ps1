@@ -33,7 +33,7 @@ param (
     [bool]$AutoRestart = $true
 )
 
-#region Logging
+#Logging
 $logPath = Join-Path $PSScriptRoot "WindowsUpdate.log"
 function Write-Log {
     param([string]$message, [string]$level = "INFO")
@@ -42,9 +42,8 @@ function Write-Log {
     Add-Content -Path $logPath -Value $logEntry
     Write-Host $logEntry -ForegroundColor $(if ($level -eq "ERROR") { "Red" } else { "White" })
 }
-#endregion
 
-#region Email Functions
+#Email Functions
 function Send-EmailReport {
     param (
         [string]$subject,
@@ -101,9 +100,9 @@ function Format-HTMLReport {
     $html += "</table></body></html>"
     return $html
 }
-#endregion
 
-#region Update Functions
+
+#Update Functions
 function Invoke-WithRetry {
     param (
         [ScriptBlock]$Action,
@@ -193,9 +192,9 @@ function Invoke-WindowsUpdate {
         exit 1
     }
 }
-#endregion
 
-#region Main Execution
+
+#main
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
     Write-Log "Elevation required. Run script as Administrator." -level "ERROR"
     exit 1
@@ -209,4 +208,3 @@ catch {
     Write-Log "Fatal error in main execution: $_" -level "ERROR"
     exit 1
 }
-#endregion
