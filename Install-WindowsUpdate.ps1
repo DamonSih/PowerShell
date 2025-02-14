@@ -189,7 +189,7 @@ function Invoke-WindowsUpdate {
     }
     catch {
         Write-Log "Update process failed: $_" -level "ERROR"
-        Send-EmailReport -subject "Windows Update Report for $machineName - Critical Error" -body "Error during update process on $machineName:<br><pre>$($_)</pre>"
+        Send-EmailReport -subject "Windows Update Report for $machineName - Critical Error" -body "Error during update process on $machineName<br><pre>$($_)</pre>"
         exit 1
     }
 }
