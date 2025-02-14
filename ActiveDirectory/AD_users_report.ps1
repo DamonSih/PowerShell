@@ -52,9 +52,9 @@ Select-Object @{Name="Full Name"; Expression={$_.Name}},
               @{Name="Company"; Expression={$_.Company}},
               @{Name="Owner (extensionAttribute10)"; Expression={$_.extensionAttribute10}},
               @{Name="Cost Centre (extensionAttribute12)"; Expression={$_.extensionAttribute12}},
-			        @{Name="Office"; Expression={$_.Office}},
-			        @{Name="CanonicalName"; Expression={$_.CanonicalName}},
-			        @{Name="Country"; Expression={$_.Country}},
+	      @{Name="Office"; Expression={$_.Office}},
+              @{Name="CanonicalName"; Expression={$_.CanonicalName}},
+	      @{Name="Country"; Expression={$_.Country}},
               @{Name="Password Last Set"; Expression={$_.PasswordLastSet.ToString("MM/dd/yyyy")}},
               @{Name="Password Expiry Date"; Expression={ 
                   if ($_."msDS-UserPasswordExpiryTimeComputed" -ne 9223372036854775807) {
