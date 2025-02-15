@@ -32,7 +32,7 @@
       -SmtpServer "smtp.office365.com"
 
 .NOTES
-	Author: Damon Sih Boon Kiat | License: CC0
+	Author: Damon Sih Boon Kiat
 #>
 
 [CmdletBinding()]
