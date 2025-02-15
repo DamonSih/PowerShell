@@ -6,7 +6,7 @@
 .EXAMPLE
 	PS> ./AD_users_report.ps1
 .NOTES
-	Author: Damon Sih Boon Kiat | License: CC0
+	Author: Damon Sih Boon Kiat
 #>
 
 $Properties = @(
