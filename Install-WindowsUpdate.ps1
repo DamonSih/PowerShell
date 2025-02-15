@@ -18,7 +18,7 @@ Enable automatic restart if required (default: true)
 .\WindowsUpdate.ps1 -EmailTo "admin@example.com" -EmailFrom "updates@example.com" -SmtpServer "smtp.office365.com" -AutoRestart $true
 
 .NOTES
-Author: Damon Sih Boon Kiat | License: CC0
+Author: Damon Sih Boon Kiat
 #>
 
 #Requires -RunAsAdministrator
