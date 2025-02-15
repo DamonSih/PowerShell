@@ -1,4 +1,4 @@
-﻿<#
+<#
 .SYNOPSIS
 	Create SQL virtual machine 
 .DESCRIPTION
@@ -10,7 +10,7 @@
 .EXAMPLE
 	PS> ./create-sql-vm.ps1 -VMName AZRWE1AVLCRDB3 -RGName WE1-EPD-AVLCRETA-RG -License PAYG
 .NOTES
-	Author: Damon Sih Boon Kiat | License: CC0
+	Author: Damon Sih Boon Kiat
 #>
 
 param(
