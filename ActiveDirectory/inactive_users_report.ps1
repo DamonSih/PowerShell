@@ -31,7 +31,7 @@ Days since last logon to consider inactive (default: 60)
       -SmtpServer "smtp.contoso.com"
     
 .NOTES
-	Author: Damon Sih Boon Kiat | License: CC0
+	Author: Damon Sih Boon Kiat
 #>
 
 [CmdletBinding()]
