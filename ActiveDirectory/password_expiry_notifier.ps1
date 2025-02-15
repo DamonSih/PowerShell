@@ -6,7 +6,7 @@
 .EXAMPLE
 	PS> ./password_expiry_notifier.ps1
 .NOTES
-	Author: Damon Sih Boon Kiat | License: CC0
+	Author: Damon Sih Boon Kiat
 #>
 
 $ErrorActionPreference = 'SilentlyContinue'
