@@ -26,7 +26,7 @@
     server3               Connection failed: WinRM not available
     
 .NOTES
-	Author: Damon Sih Boon Kiat | License: CC0
+	Author: Damon Sih Boon Kiat
 
 #>
 
