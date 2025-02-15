@@ -30,7 +30,7 @@
 .EXAMPLE
 	PS> ./create-managed-disk.ps1 -subscriptionId 48d31e3b-17b4-431c-8201-794dc197ea95 -resourceGroupName USE2-NPD-EATOOL-RG -diskName azruse2eatool1-OSdisk-00 -diskSize 100 -vhdUri '<HTTPS link here>' -sku PremiumLRS -location westeurope -osType None -hyperVGeneration None
 .NOTES
-	Author: Damon Sih Boon Kiat | License: CC0
+	Author: Damon Sih Boon Kiat
 #>
 
 param(
