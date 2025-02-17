@@ -6,13 +6,12 @@
   This script checks the onboarding status of Advanced Threat Protection and the service status of the Advanced Treat Protection Sensor
     
 .NOTES
-	Author: Damon Sih Boon Kiat
-
+  Author: Damon Sih Boon Kiat
 #>
 
 # Define the registry path and value name of ATP
-$registryPath = "HKLM\SOFTWARE\Microsoft\ Windows Advanced Threat Protection\Status"
-$valueName ="OnboardingState"
+$registryPath = "HKLM:\SOFTWARE\Microsoft\Windows Advanced Threat Protection\Status"
+$valueName = "OnboardingState"
 
 # Define the service name
 $serviceName = "Azure Advanced Threat Protection Sensor"
@@ -26,19 +25,24 @@ function Get-ServiceStatus {
     if ($service) {
         return $service.Status
     } else {
-        return “Service not found"
+        return "Service not found"
     }
 }
 
 # Check if registry key exists
 if (Test-Path $registryPath) {
-    # Get the registry value
-    $value = Get-ItemProperty -Path $registryPath -Name $valueName -ErrorAction Stop
-    # Check if the value is 1
-    if ($value.OnboardingState -eq 1) {
-        Write-Output "The OnboardingState is set to 1." -ForegroundColor Green
-    } else {
-        Write-Output "The OnboardingState is NOT set to 1. Current value: $($value.OnboardingState)" -ForegroundColor Yellow
+    # Try get the registry value
+    try {
+        $value = Get-ItemProperty -Path $registryPath -Name $valueName -ErrorAction Stop
+    
+        # Check if the value is 1
+        if ($value.OnboardingState -eq 1) {
+            Write-Output "The OnboardingState is set to 1." -ForegroundColor Green
+        } else {
+            Write-Output "The OnboardingState is NOT set to 1. Current value: $($value.OnboardingState)" -ForegroundColor Yellow
+        }
+    } catch {
+        Write-Output "The property '$valueName' does not exist in the registry path '$registryPath'."
     }
 } else {
     Write-Output "The registry path $registryPath does not exist." -ForegroundColor Yellow
