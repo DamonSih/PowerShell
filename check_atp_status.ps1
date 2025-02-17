@@ -26,7 +26,8 @@ function Get-ServiceStatus {
     if ($service) {
         return $service.Status
     } else {
-        return “Service not found" 
+        return “Service not found"
+    }
 }
 
 # Check if registry key exists
@@ -38,10 +39,10 @@ if (Test-Path $registryPath) {
         Write-Output "The OnboardingState is set to 1." -ForegroundColor Green
     } else {
         Write-Output "The OnboardingState is NOT set to 1. Current value: $($value.OnboardingState)" -ForegroundColor Yellow
-    ]
+    }
 } else {
     Write-Output "The registry path $registryPath does not exist." -ForegroundColor Yellow
-]
+}
 
 # Check the status of the service
 $serviceStatus = Get-ServiceStatus -serviceName $serviceName
