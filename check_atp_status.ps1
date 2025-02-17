@@ -15,6 +15,10 @@ Sender email address
 .PARAMETER SmtpServer
 SMTP server address
 
+.EXAMPLE
+.\check_atp_status.ps1 -EmailTo "admin@example.com" -EmailFrom "updates@example.com" -SmtpServer "smtp.office365.com"
+
+
 .NOTES
   Author: Damon Sih Boon Kiat
 #>
