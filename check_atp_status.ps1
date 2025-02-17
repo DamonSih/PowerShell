@@ -56,8 +56,8 @@ function Send-EmailNotification {
         [string]$body
     )
     try {
-        Send-MailMessage -From $EmailFrom -To $EmailTo -Subject $subject -Body $body -SmtpServer $SmtpServer
-        Write-Output "Email notification sent to $to."
+        Send-MailMessage -From $EmailFrom -To $EmailTo -Subject $subject -Body $body -SmtpServer $SmtpServer -UseSsl
+        Write-Output "Email notification sent to $EmailTo."
     } catch {
         Write-Output "Failed to send email notification: $_"
     }
@@ -111,7 +111,7 @@ Write-Output "The status of the service '$serviceName' is: $serviceStatus"
 # If the service is not found, send email
 if ($serviceStatus -eq "Service not found") {
     $serverName = $env:COMPUTERNAME 
-    $emailSubject = “Service Not Found: $serviceName on $serverName"
+    $emailSubject = "Service Not Found: $serviceName on $serverName"
     $emailBody = @"
 The service '$serviceName' on server '$serverName' was not found. Please check the server and take necessary actions.
 
