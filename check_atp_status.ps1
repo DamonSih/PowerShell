@@ -26,7 +26,7 @@ SMTP server address
 param (
     [string]$EmailTo,
     [string]$EmailFrom,
-    [string]$SmtpServer,
+    [string]$SmtpServer
 )
 
 # Define the registry path and value name of ATP
