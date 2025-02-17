@@ -65,7 +65,7 @@ function Send-EmailNotification {
 
 # Function to get server IP address
 function Get-ServerIP {
-  $ipAddresses = Get-NetIPAddress | Where-Object {$_.AddressFaily -eq 'IPv4' -and $_.PrefixOrigin -ne 'WellKnown'} | Select-Object -ExpandProperty IPAddress
+  $ipAddresses = Get-NetIPAddress | Where-Object {$_.AddressFamily -eq 'IPv4' -and $_.PrefixOrigin -ne 'WellKnown'} | Select-Object -ExpandProperty IPAddress
   return $ipAddresses -join ", "
 }
 
