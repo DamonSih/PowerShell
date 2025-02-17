@@ -93,15 +93,15 @@ if (Test-Path $registryPath) {
     
         # Check if the value is 1
         if ($value.OnboardingState -eq 1) {
-            Write-Output "The OnboardingState is set to 1." -ForegroundColor Green
+            Write-Output "The OnboardingState is set to 1."
         } else {
-            Write-Output "The OnboardingState is NOT set to 1. Current value: $($value.OnboardingState)" -ForegroundColor Yellow
+            Write-Output "The OnboardingState is NOT set to 1. Current value: $($value.OnboardingState)"
         }
     } catch {
         Write-Output "The property '$valueName' does not exist in the registry path '$registryPath'."
     }
 } else {
-    Write-Output "The registry path $registryPath does not exist." -ForegroundColor Yellow
+    Write-Output "The registry path $registryPath does not exist."
 }
 
 # Check the status of the service
