@@ -56,7 +56,7 @@ function Send-EmailNotification {
         [string]$body
     )
     try {
-        Send-MailMessage -From $EmailFrom -To $EmailTo -Subject $subject -Body $body -SmtpServer $SmtpServer -UseSsl
+        Send-MailMessage -From $EmailFrom -To $EmailTo -Subject $subject -Body $body -SmtpServer $SmtpServer
         Write-Output "Email notification sent to $EmailTo."
     } catch {
         Write-Output "Failed to send email notification: $_"
