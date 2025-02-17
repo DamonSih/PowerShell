@@ -1,13 +1,29 @@
 <#
 .SYNOPSIS
-  To check the onboarding status and sensor status of the ATP
+  To check the onboarding status and sensor status of the ATP, and email the status of the service to admin
 
 .DESCRIPTION
   This script checks the onboarding status of Advanced Threat Protection and the service status of the Advanced Treat Protection Sensor
-    
+  Email admin if service not found/failed to start after 3 attempts
+
+.PARAMETER EmailTo
+Recipient email address
+
+.PARAMETER EmailFrom
+Sender email address
+
+.PARAMETER SmtpServer
+SMTP server address
+
 .NOTES
   Author: Damon Sih Boon Kiat
 #>
+
+param (
+    [string]$EmailTo,
+    [string]$EmailFrom,
+    [string]$SmtpServer,
+)
 
 # Define the registry path and value name of ATP
 $registryPath = "HKLM:\SOFTWARE\Microsoft\Windows Advanced Threat Protection\Status"
@@ -27,6 +43,42 @@ function Get-ServiceStatus {
     } else {
         return "Service not found"
     }
+}
+
+# Function to send email
+function Send-EmailNotification {
+    param (
+        [string]$subject,
+        [string]$body
+    )
+    try {
+        Send-MailMessage -From $EmailFrom -To $EmailTo -Subject $subject -Body $body -SmtpServer $SmtpServer
+        Write-Output "Email notification sent to $to."
+    } catch {
+        Write-Output "Failed to send email notification: $_"
+    }
+}
+
+# Function to start the service
+function Start-ServiceWithRetry {
+    param (
+        [string]$serviceName,
+        [int]$maxRetries = 3
+    )
+    $retryCount = 0
+    while ($retryCount -lt $maxRetries) {
+        $serviceStatus = Get-ServiceStatus -serviceName $serviceName
+        if ($serviceStatus -eq "Running") {
+            Write-Output "The service '$serviceName' is now running."
+            return $true
+        } else {
+            Write-Output "Attempt $($retryCount + 1): Starting the service '$serviceName'..."
+            Start-Service -Name $serviceName -ErrorAction SilentlyContinue
+            Start-Sleep -Seconds 10  # 10 seconds buffer
+            $retryCount++
+        }
+    }
+    return $false
 }
 
 # Check if registry key exists
@@ -51,3 +103,34 @@ if (Test-Path $registryPath) {
 # Check the status of the service
 $serviceStatus = Get-ServiceStatus -serviceName $serviceName
 Write-Output "The status of the service '$serviceName' is: $serviceStatus"
+
+# If the service is not found, send email
+if ($serviceStatus -eq "Service not found") {
+    $serverName = $env:COMPUTERNAME 
+    $emailSubject = “Service Not Found: $serviceName on $serverName"
+    $emailBody = @"
+The service '$serviceName' on server '$serverName' was not found. Please check the server and take necessary actions.
+
+Details:
+- Service Name: $serviceName
+- Server Name: $serverName
+- Time: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+"@
+    Send-EmailNotification -subject $emailSubject -body $emailBody
+} elseif ($serviceStatus -ne "Running") {
+    $startSuccess = Start-ServiceWithRetry -serviceName $serviceName -maxRetries 3
+    if (-not $startSuccess) {
+        Write-Output "Failed to start the service '$serviceName' after 3 attempts"
+        $serverName =$env:COMPUTERNAME
+        $emailSubject = "Service Start Failed: $serviceName on $serverName"
+        $emailBody = @"
+The service '$serviceName' on server '$serverName' failed to start after 3 attempts. Please check the server and take necessary actions.
+
+Details:
+- Service Name: $serviceName
+- Server Name: $serverName
+- Time: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
+"@
+        Send-EmailNotification -subject $emailSubject -body $emailBody
+    }
+}
