@@ -63,6 +63,12 @@ function Send-EmailNotification {
     }
 }
 
+# Function to get server IP address
+function Get-ServerIP {
+  $ipAddresses = Get-NetIPAddress | Where-Object {$_.AddressFaily -eq 'IPv4'} | Select-Object -ExpandProperty IPAddress
+  return $ipAddresses -join ", "
+}
+
 # Function to start the service
 function Start-ServiceWithRetry {
     param (
@@ -104,6 +110,9 @@ if (Test-Path $registryPath) {
     Write-Output "The registry path $registryPath does not exist."
 }
 
+# Get server IP address
+$serverIP = Get-ServerIP
+
 # Check the status of the service
 $serviceStatus = Get-ServiceStatus -serviceName $serviceName
 Write-Output "The status of the service '$serviceName' is: $serviceStatus"
@@ -118,6 +127,7 @@ The service '$serviceName' on server '$serverName' was not found. Please check t
 Details:
 - Service Name: $serviceName
 - Server Name: $serverName
+- Server IP: $serverIP
 - Time: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 "@
     Send-EmailNotification -subject $emailSubject -body $emailBody
@@ -133,6 +143,7 @@ The service '$serviceName' on server '$serverName' failed to start after 3 attem
 Details:
 - Service Name: $serviceName
 - Server Name: $serverName
+- Server IP: $serverIP
 - Time: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 "@
         Send-EmailNotification -subject $emailSubject -body $emailBody
